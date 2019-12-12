@@ -3,9 +3,10 @@ package com.hepta.mercado.persistence;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class HibernateUtil {
-	private static final String PERSISTENCE_UNIT_NAME = "mercado-bd";
+	private static final String PERSISTENCE_UNIT_NAME = "mercado";
 	
 	private static EntityManagerFactory factory;
 
@@ -25,7 +26,7 @@ public class HibernateUtil {
 	public static void createEntityManagerFactory(){
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 	}
-	
+
 	public static EntityManager getEntityManager(){
 		return HibernateUtil.getEntityManagerFactory().createEntityManager();
 	}
