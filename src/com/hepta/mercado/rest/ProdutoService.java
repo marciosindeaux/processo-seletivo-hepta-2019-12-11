@@ -52,7 +52,13 @@ public class ProdutoService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@POST
 	public Response produtoCreate(Produto produto) {
-		return Response.status(Status.NOT_IMPLEMENTED).build();
+		try{
+
+			dao.save(produto);
+		}catch (Exception e){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro cadastrar produto").build();
+		}
+		return Response.status(Status.OK).entity("Produto cadastrado com sucesso").build();
 	}
 	
 	/**
