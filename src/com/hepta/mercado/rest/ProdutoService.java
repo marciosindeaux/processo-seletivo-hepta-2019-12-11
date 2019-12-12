@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.hepta.mercado.entity.Produto;
+import com.hepta.mercado.persistence.FabricanteDAO;
 import com.hepta.mercado.persistence.ProdutoDAO;
 
 @Path("/produtos")
@@ -31,10 +32,12 @@ public class ProdutoService {
 	@Context
 	private HttpServletResponse response;
 
-	private ProdutoDAO dao;
+	private ProdutoDAO produtoDAO;
+	private FabricanteDAO fabricanteDAO;
 	
 	public ProdutoService() {
-		dao = new ProdutoDAO();
+		produtoDAO = new ProdutoDAO();
+		fabricanteDAO = new FabricanteDAO();
 	}
 	
 	protected void setRequest(HttpServletRequest request) {
@@ -53,8 +56,8 @@ public class ProdutoService {
 	@POST
 	public Response produtoCreate(Produto produto) {
 		try{
-
-			dao.save(produto);
+			fabricanteDAO.save(produto.getFabricante());
+			produtoDAO.save(produto);
 		}catch (Exception e){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro cadastrar produto").build();
 		}
@@ -72,7 +75,8 @@ public class ProdutoService {
 	public Response produtoRead() {
 		List<Produto> produtos = new ArrayList<>();
 		try {
-			produtos = dao.getAll();
+			produtos = produtoDAO.getAll();
+//			throw new Exception();
 		} catch(Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar produtos").build();
 		}
@@ -93,6 +97,7 @@ public class ProdutoService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@PUT
 	public Response produtoUpdate(@PathParam("id") Integer id, Produto produto) {
+
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 	
