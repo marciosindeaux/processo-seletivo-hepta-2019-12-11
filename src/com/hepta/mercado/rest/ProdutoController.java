@@ -1,30 +1,21 @@
 package com.hepta.mercado.rest;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.hepta.mercado.entity.Produto;
+import com.hepta.mercado.service.ProdutoService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
-import com.hepta.mercado.entity.Produto;
-import com.hepta.mercado.persistence.FabricanteDAO;
-import com.hepta.mercado.persistence.ProdutoDAO;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/produtos")
-public class ProdutoService {
+public class ProdutoController {
 	
 	@Context
 	private HttpServletRequest request;
@@ -32,12 +23,10 @@ public class ProdutoService {
 	@Context
 	private HttpServletResponse response;
 
-	private ProdutoDAO produtoDAO;
-	private FabricanteDAO fabricanteDAO;
+	ProdutoService produtoService;
 	
-	public ProdutoService() {
-		produtoDAO = new ProdutoDAO();
-		fabricanteDAO = new FabricanteDAO();
+	public ProdutoController() {
+		produtoService = new ProdutoService();
 	}
 	
 	protected void setRequest(HttpServletRequest request) {
@@ -56,8 +45,7 @@ public class ProdutoService {
 	@POST
 	public Response produtoCreate(Produto produto) {
 		try{
-			fabricanteDAO.save(produto.getFabricante());
-			produtoDAO.save(produto);
+			produtoService.salvarProduto(produto);
 		}catch (Exception e){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro cadastrar produto").build();
 		}
@@ -75,8 +63,7 @@ public class ProdutoService {
 	public Response produtoRead() {
 		List<Produto> produtos = new ArrayList<>();
 		try {
-			produtos = produtoDAO.getAll();
-//			throw new Exception();
+			produtos = produtoService.listarProdutos();
 		} catch(Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar produtos").build();
 		}
