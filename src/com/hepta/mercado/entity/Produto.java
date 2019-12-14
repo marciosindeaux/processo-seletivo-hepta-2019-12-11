@@ -1,14 +1,8 @@
 package com.hepta.mercado.entity;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Produto implements Serializable {
@@ -18,20 +12,25 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_PRODUTO")
 	private Integer id;
-	
+
+	@NotNull(message = "É obrigatório o nome do produto")
 	@Column(name = "NOME")
 	private String nome;
-		
+
+	@NotNull(message = "É Necessário a identificação do Fabricante")
 	@ManyToOne
 	@JoinColumn(name = "ID_FABRICANTE")
 	private Fabricante fabricante;
-	
+
+	@NotNull(message = "É obrigatória a identificação do Volume")
 	@Column(name = "VOLUME")
 	private Double volume;
-	
+
+	@NotNull(message = "É obrigatória a identificação da Unidade")
 	@Column(name = "UNIDADE")
 	private String unidade;
-	
+
+	@NotNull(message = "É obrigatória a informação em estoque")
 	@Column(name = "ESTOQUE")
 	private Integer estoque;
 
