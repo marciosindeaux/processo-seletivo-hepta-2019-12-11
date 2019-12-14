@@ -1,13 +1,11 @@
 package com.hepta.mercado.persistence;
 
-import com.hepta.mercado.entity.Produto;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDAO {
+public abstract class AbstractDAO<T> {
 
     public void save(Object entity) throws Exception {
         EntityManager em = HibernateUtil.getEntityManager();
@@ -70,19 +68,19 @@ public abstract class AbstractDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Produto> getAll() throws Exception {
+    public List<T> getAll() throws Exception {
         EntityManager em = HibernateUtil.getEntityManager();
-        List<Produto> produtos = new ArrayList<>();
+        List<T> list = new ArrayList<>();
         try {
             Query query = em.createQuery("FROM " + nameAbstractEntity());
-            produtos = query.getResultList();
+            list = query.getResultList();
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw new Exception(e);
         } finally {
             em.close();
         }
-        return produtos;
+        return list;
     }
 
     protected abstract Object findAbstractEntity(EntityManager em, Integer id);

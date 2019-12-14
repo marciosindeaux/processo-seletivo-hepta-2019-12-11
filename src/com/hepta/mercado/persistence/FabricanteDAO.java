@@ -3,14 +3,13 @@ package com.hepta.mercado.persistence;
 import com.hepta.mercado.entity.Fabricante;
 
 import javax.persistence.EntityManager;
-import javax.print.DocFlavor;
 
-public class FabricanteDAO extends AbstractDAO {
+public class FabricanteDAO extends AbstractDAO<Fabricante> {
 
 
     @Override
     protected Object findAbstractEntity(EntityManager em, Integer id) {
-        return  (Fabricante) em.find(Fabricante.class, id);
+        return em.find(Fabricante.class, id);
     }
 
     @Override

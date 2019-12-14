@@ -1,18 +1,14 @@
 package com.hepta.mercado.persistence;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import com.hepta.mercado.entity.Produto;
 
-public class ProdutoDAO extends AbstractDAO{
+import javax.persistence.EntityManager;
+
+public class ProdutoDAO extends AbstractDAO<Produto>{
 
 	@Override
 	protected Object findAbstractEntity(EntityManager em, Integer id) {
-		return (Produto) em.find(Produto.class, id);
+		return em.find(Produto.class, id);
 	}
 
 	@Override
