@@ -11,35 +11,56 @@
 	href="resources/css/bootstrap-vue.css">
 </head>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="index.html" style="font-size: 20px;">Mercadinho</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar"
+			aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="textoNavbar">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item  active">
+				<a class="nav-link" href="index.html">Listagem De Produtos</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="novo-produto.html">Cadastro de novos Produtos</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<br>
 <body>
-
-
-	<div id="inicio" class="container-fluid table" >
+<div id="inicio">
+	<div class="container table" >
 		<h4>Lista de Produtos</h4>
-		<table>
-		  <tr>
-			<th>Nome</th>
-			<th>Fabricante</th>
-			<th>Volume</th>
-			<th>Unidade</th>
-			<th>Estoque</th>
-			<th></th>
-			<th></th>
-		  </tr>
-		  <tbody id="event-table" >
-			<tr v-for="produto in listaProdutos">
-			  <td>{{ produto.nome }}</td> 
-			  <td>{{ produto.fabricante.nome }}</td> 
-			  <td>{{ produto.volume }}</td> 
-			  <td>{{ produto.unidade }}</td> 
-			  <td>{{ produto.estoque }}</td>
-			  <td><span @click="">&#9998;</span>
-				<span  @click="">&#10006;</span>
-			  </td>
-			</tr>
-		  </tbody>
+		<br>
+		<table style="width: 100%;">
+			<thead class="thead-dark">
+				<tr>
+					<th>Nome</th>
+					<th>Fabricante</th>
+					<th>Volume</th>
+					<th>Unidade</th>
+					<th>Estoque</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="event-table" >
+				<tr v-for="produto in listaProdutos">
+					<td>{{ produto.nome }}</td>
+					<td>{{ produto.fabricante.nome }}</td>
+					<td>{{ produto.volume }}</td>
+					<td>{{ produto.unidade }}</td>
+					<td>{{ produto.estoque }}</td>
+					<td><span @click="">&#9998;</span>
+						<span  @click="">&#10006;</span>
+					</td>
+				</tr>
+			</tbody>
 		</table>
-	  </div>
+	</div>
+</div>
+
 
 	<script src="resources/js/vue.js"></script>
 	<script src="resources/js/axios.min.js"></script>

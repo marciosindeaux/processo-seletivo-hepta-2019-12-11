@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class HibernateUtil {
-	private static final String PERSISTENCE_UNIT_NAME = "mercado-bd";
+	private static final String PERSISTENCE_UNIT_NAME = "mercado";
 	
 	private static EntityManagerFactory factory;
 
@@ -25,7 +25,7 @@ public class HibernateUtil {
 	public static void createEntityManagerFactory(){
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 	}
-	
+
 	public static EntityManager getEntityManager(){
 		return HibernateUtil.getEntityManagerFactory().createEntityManager();
 	}
