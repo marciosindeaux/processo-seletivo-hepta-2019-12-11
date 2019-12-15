@@ -17,7 +17,7 @@ var inicio = new Vue({
     methods:{
         buscaProdutos: function(){
 			const vm = this;
-			axios.get("/mercado/rs/produtos")
+			axios.get("http://localhost:8080/mercado/rs/produtos")
 			.then(response => {vm.listaProdutos = response.data;
 			}).catch(function (error) {
 				vm.mostraAlertaErro("Erro interno", "Não foi listar natureza de serviços");
