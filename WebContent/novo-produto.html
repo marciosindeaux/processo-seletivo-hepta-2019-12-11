@@ -6,25 +6,45 @@
 	<link rel="shortcut icon" href="favicon.ico"/>
 	<title>Cadastrar um novo Produto </title>
 	<link rel="stylesheet" type="text/css"
-		href="resources/css/bootstrap.min.css">
+		  href="resources/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css"
-		href="resources/css/main.css">
+		  href="resources/css/main.css">
 </head>
-
 <body>
+<div id="novoProduto">
+	<navigation v-bind:first="false"></navigation>
+	<br>
 
-<a href="/mercado/index.html">Voltar</a>
-
-<div id="app">
-	<p>{{mensagem}}</p>
-	
-	<h4>Cadastro de produto</h4>
-		
-	<p>Implementar o cadastro de produto</p>	
+	<div id="app" class="container">
+		<h4>Cadastro de produto</h4>
+		<form>
+			<div class="form-group">
+				<label for="nomeProduto">Digite o produto</label>
+				<input type="text" class="form-control" id="nomeProduto" placeholder="Nome Do Produto">
+			</div>
+			<div class="form-group">
+				<label for="fabricante">Nome da Fabricante</label>
+				<input type="text" class="form-control" id="fabricante" placeholder="Nome da Fabricante">
+			</div>
+			<div class="form-group">
+				<label for="unidade">Unidade</label>
+				<input type="text" class="form-control" id="unidade">
+			</div>
+			<div class="form-group">
+				<label for="volume">Volume</label>
+				<input type="text" class="form-control" id="volume">
+			</div>
+			<div class="form-group">
+				<label for="estoque">Estoque</label>
+				<input type="number" class="form-control" id="estoque">
+			</div>
+			<button type="submit" class="btn btn-dark">Cadastrar</button>
+		</form>
+	</div>
 </div>
-
-	<script src="resources/js/vue.js"></script>
-	<script src="resources/js/axios.min.js"></script>
-	<script src="resources/js/cadastro-de-produtos.js"></script>
+<script src="resources/js/vue.js"></script>
+<script src="resources/js/axios.min.js"></script>
+<script src="resources/js/components/default/NavBarComponent.js"></script>
+<script src="resources/js/NovoProduto.js"></script>
 </body>
 </html>
