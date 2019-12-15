@@ -3,7 +3,6 @@ package com.hepta.mercado.persistence;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 public class HibernateUtil {
 	private static final String PERSISTENCE_UNIT_NAME = "mercado";
