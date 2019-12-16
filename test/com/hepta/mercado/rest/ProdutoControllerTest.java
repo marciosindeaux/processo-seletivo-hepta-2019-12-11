@@ -1,4 +1,4 @@
-package com.hepta.mercado.rest.produto;
+package com.hepta.mercado.rest;
 
 import com.hepta.mercado.builder.FabricanteBuilder;
 import com.hepta.mercado.builder.ProdutoBuilder;
