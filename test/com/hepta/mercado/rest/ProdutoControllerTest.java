@@ -88,4 +88,11 @@ class ProdutoControllerTest extends AbstractControllerTest {
 		}
 	}
 
+	@Test
+	public void naoDeveExcluirItem(){
+		service = TestUtils.generateWebTarget(URL_LOCAL, "produtos/-1");
+		Response response = service.request().delete();
+		assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(),response.getStatusInfo().getStatusCode());
+	}
+
 }
