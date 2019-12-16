@@ -25,4 +25,8 @@ public class ProdutoService {
         return produtoDAO.getAll();
     }
 
+    public void excluirProduto(Integer id) throws Exception {
+        produtoDAO.delete(id);
+    }
+
 }
