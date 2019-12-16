@@ -5,7 +5,6 @@ import com.hepta.mercado.persistence.FabricanteDAO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 class FabricanteService {
 

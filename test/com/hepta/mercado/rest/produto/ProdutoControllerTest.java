@@ -6,16 +6,12 @@ import com.hepta.mercado.entity.Produto;
 import com.hepta.mercado.rest.AbstractControllerTest;
 import com.hepta.mercado.utils.ConverterUtils;
 import com.hepta.mercado.utils.TestUtils;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
