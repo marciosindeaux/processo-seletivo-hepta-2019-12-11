@@ -98,7 +98,12 @@ public class ProdutoController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@DELETE
 	public Response produtoDelete(@PathParam("id") Integer id) {
-		return Response.status(Status.NOT_IMPLEMENTED).build();
+		try{
+			produtoService.excluirProduto(id);
+		}catch (Exception e){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		return Response.status(Status.OK).build();
 	}
 
 }
