@@ -5,46 +5,25 @@
 	<meta charset="utf-8">
 	<link rel="shortcut icon" href="favicon.ico"/>
 	<title>Cadastrar um novo Produto </title>
-	<link rel="stylesheet" type="text/css"
-		  href="resources/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css"
-		  href="resources/css/main.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="resources/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div id="novoProduto">
+<div id="inicio">
 	<navigation v-bind:first="false"></navigation>
 	<br>
-
-	<div id="app" class="container">
+	<div class="container">
 		<h4>Cadastro de produto</h4>
-		<form>
-			<div class="form-group">
-				<label for="nomeProduto">Digite o produto</label>
-				<input type="text" class="form-control" id="nomeProduto" placeholder="Nome Do Produto">
-			</div>
-			<div class="form-group">
-				<label for="fabricante">Nome da Fabricante</label>
-				<input type="text" class="form-control" id="fabricante" placeholder="Nome da Fabricante">
-			</div>
-			<div class="form-group">
-				<label for="unidade">Unidade</label>
-				<input type="text" class="form-control" id="unidade">
-			</div>
-			<div class="form-group">
-				<label for="volume">Volume</label>
-				<input type="text" class="form-control" id="volume">
-			</div>
-			<div class="form-group">
-				<label for="estoque">Estoque</label>
-				<input type="number" class="form-control" id="estoque">
-			</div>
-			<button type="submit" class="btn btn-dark">Cadastrar</button>
-		</form>
+		<form-input cadastro="true"></form-input>
 	</div>
 </div>
 <script src="resources/js/vue.js"></script>
 <script src="resources/js/axios.min.js"></script>
+<script src="resources/js/components/default/RegisterButtonCompoinent.js"></script>
+<script src="resources/js/components/default/FormComponent.js"></script>
 <script src="resources/js/components/default/NavBarComponent.js"></script>
-<script src="resources/js/NovoProduto.js"></script>
+<script src="resources/js/index.js"></script>
 </body>
 </html>
