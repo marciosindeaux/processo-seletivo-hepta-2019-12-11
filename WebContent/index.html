@@ -2,59 +2,25 @@
 <html>
 
 <head>
-<meta charset="utf-8">
-<link rel="shortcut icon" href="favicon.ico"/>
-<title>Inventário Mercadinho - Início</title>
-<link rel="stylesheet" type="text/css"
-	href="resources/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/css/bootstrap-vue.css">
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="favicon.ico"/>
+	<title>Inventário Mercadinho - Início</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"  href="resources/css/bootstrap-vue.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="resources/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div id="inicio">
 	<navigation v-bind:first="true"></navigation>
-	<br>
-	<div class="container table" >
-		<h4>Lista de Produtos</h4>
-		<br>
-		<table style="width: 100%;" class="table-striped">
-			<thead class="thead-dark">
-				<tr>
-					<th>Nome</th>
-					<th>Fabricante</th>
-					<th>Volume</th>
-					<th>Unidade</th>
-					<th>Estoque</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody id="event-table" >
-				<tr v-for="produto in listaProdutos">
-					<td>{{ produto.nome }}</td>
-					<td>{{ produto.fabricante.nome }}</td>
-					<td>{{ produto.volume }}</td>
-					<td>{{ produto.unidade }}</td>
-					<td>{{ produto.estoque }}</td>
-					<td>
-						<span @click="">
-							<svg id="i-compose" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-								<path d="M27 15 L27 30 2 30 2 5 17 5 M30 6 L26 2 9 19 7 25 13 23 Z M22 6 L26 10 Z M9 19 L13 23 Z" />
-							</svg>
-						</span>
-						<span @click="excluirItem(produto.id)">
-							<svg id="i-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-								<path d="M2 30 L30 2 M30 30 L2 2" />
-							</svg>
-						</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
+	<general-table  v-bind:lista="listaProdutos"></general-table>
 
+</div>
 	<script src="resources/js/vue.js"></script>
 	<script src="resources/js/axios.min.js"></script>
+	<script src="resources/js/components/index/ExcludeButtonComponent.js"></script>
+	<script src="resources/js/components/index/TableItemComponent.js"></script>
+	<script src="resources/js/components/index/TableComponent.js"></script>
 	<script src="resources/js/components/default/NavBarComponent.js"></script>
 	<script src="resources/js/Index.js"></script>
 </body>
