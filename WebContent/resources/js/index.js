@@ -24,5 +24,15 @@ var inicio = new Vue({
 			}).finally(function() {
 			});
 		},
+		excluirItem:function (idProduto) {
+        	alert(idProduto);
+			axios.delete("/mercado/rs/produtos/"+idProduto)
+				.then(response => {
+					window.location.reload()
+				}).catch( function (error) {
+					alert("Produto não excluido");
+				}).finally(function () {});
+        }
+
     }
 });
