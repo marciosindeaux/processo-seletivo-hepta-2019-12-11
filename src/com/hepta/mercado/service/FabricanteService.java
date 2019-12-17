@@ -15,7 +15,7 @@ class FabricanteService {
     }
 
     void salvarFabricante(Fabricante fabricante) throws Exception {
-        if(fabricante!= null){
+        if(fabricante!= null && !fabricante.getNome().isEmpty()){
             List<Fabricante> fabricantes = new ArrayList<Fabricante>(fabricanteDAO.getAll());
 
             for(Fabricante item : fabricantes){
