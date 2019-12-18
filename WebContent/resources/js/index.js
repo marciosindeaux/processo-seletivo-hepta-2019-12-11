@@ -17,8 +17,5 @@ var inicio = new Vue({
 				vm.mostraAlertaErro("Erro interno", "Não foi listar natureza de serviços");
 			}).finally(function() {});
 		},
-		setIdItem(prop){
-        	this.idItemPut = prop;
-		}
     }
 });

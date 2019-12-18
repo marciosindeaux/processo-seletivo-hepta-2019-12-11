@@ -19,8 +19,8 @@ Vue.component('navigation',{
                 <li class="nav-item active" >
                     <a class="nav-link" href="novo-produto.html">Cadastro de novos Produtos</a>
                 </li>
-            <ul>
+            </ul>
 	    </div>
     </nav>
     `
-})
+});

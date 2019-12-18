@@ -2,6 +2,7 @@ package com.hepta.mercado.rest;
 
 import com.hepta.mercado.entity.Produto;
 import com.hepta.mercado.service.ProdutoService;
+import jdk.nashorn.internal.objects.annotations.Getter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,9 +48,9 @@ public class ProdutoController {
 		try{
 			produtoService.salvarProduto(produto);
 		}catch (Exception e){
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro cadastrar produto").build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
-		return Response.status(Status.OK).entity("Produto cadastrado com sucesso").build();
+		return Response.status(Status.OK).build();
 	}
 	
 	/**
@@ -65,11 +66,24 @@ public class ProdutoController {
 		try {
 			produtos = produtoService.listarProdutos();
 		} catch(Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar produtos").build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		
 		GenericEntity<List<Produto>> entity = new GenericEntity<List<Produto>>(produtos) {};
 		return Response.status(Status.OK).entity(entity).build();
+	}
+
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public Response buscarPorId(@PathParam("id") Integer id){
+		Produto produto = null;
+		try{
+			produto = produtoService.buscarPorId(id);
+		}catch (Exception e){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		return Response.status(Status.OK).entity(new GenericEntity<Produto>(produto){}).build();
 	}
 	
 	/**
@@ -85,7 +99,12 @@ public class ProdutoController {
 	@PUT
 	public Response produtoUpdate(@PathParam("id") Integer id, Produto produto) {
 
-		return Response.status(Status.NOT_IMPLEMENTED).build();
+		try{
+			produtoService.atualizarProduto(id, produto);
+		}catch (Exception e){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		return Response.status(Status.OK).build();
 	}
 	
 	/**

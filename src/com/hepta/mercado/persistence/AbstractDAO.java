@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public abstract class AbstractDAO<T> {
 
@@ -58,6 +59,9 @@ public abstract class AbstractDAO<T> {
         Object produto = null;
         try {
             produto = findAbstractEntity(em,id);
+            if(produto == null){
+                throw new NoSuchElementException();
+            }
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw new Exception(e);
