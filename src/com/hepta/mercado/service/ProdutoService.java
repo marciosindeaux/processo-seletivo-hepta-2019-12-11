@@ -29,4 +29,15 @@ public class ProdutoService {
         produtoDAO.delete(id);
     }
 
+    public void atualizarProduto(Integer id, Produto produto) throws Exception {
+        produtoDAO.find(id);
+        produto.setId(id);
+        fabricanteService.salvarFabricante(produto.getFabricante());
+        produtoDAO.update(produto);
+    }
+
+    public Produto buscarPorId(Integer id) throws Exception {
+        return (Produto) produtoDAO.find(id);
+    }
+
 }

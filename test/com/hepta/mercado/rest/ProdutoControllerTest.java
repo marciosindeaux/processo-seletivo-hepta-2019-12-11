@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -60,8 +61,7 @@ class ProdutoControllerTest extends AbstractControllerTest {
 	}
 
 	@Test
-	void deveExcluirItem() throws InterruptedException {
-		try{
+	void deveExcluirItem()  {
 
 			//Cadastrar um produt antes de Exclui-lo
 
@@ -83,16 +83,53 @@ class ProdutoControllerTest extends AbstractControllerTest {
 			response = service.request().delete();
 			assertEquals(Response.Status.OK.getStatusCode(),response.getStatusInfo().getStatusCode());
 
-		}catch(Exception e){
-			throw e;
-		}
 	}
 
 	@Test
-	public void naoDeveExcluirItem(){
+	void naoDeveExcluirItem(){
 		service = TestUtils.generateWebTarget(URL_LOCAL, "produtos/-1");
 		Response response = service.request().delete();
 		assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(),response.getStatusInfo().getStatusCode());
+	}
+
+	@Test
+	void atualizarNovoProduto(){
+
+		Response response = service.request().post(Entity.entity(produto, MediaType.APPLICATION_JSON_TYPE));
+		assertEquals(Response.Status.OK.getStatusCode(),response.getStatusInfo().getStatusCode() );
+
+
+		response = service.request().get();
+		response.bufferEntity();
+		List<Produto> produtos = (List<Produto>) response.readEntity(List.class)
+				.stream()
+				.map(item -> ConverterUtils.convertTo(item, Produto.class))
+				.collect(Collectors.toList());
+
+		Produto produtoRequisitado = produtos.get(0);
+		produto.setId(produtoRequisitado.getId());
+
+		service = TestUtils.generateWebTarget(URL_LOCAL, "produtos/"+produtoRequisitado.getId());
+		service.request().put(Entity.entity(produto, MediaType.APPLICATION_JSON_TYPE));
+
+		service = TestUtils.generateWebTarget(URL_LOCAL, "produtos/"+produtoRequisitado.getId());
+		response = service.request().get();
+		response.bufferEntity();
+		Produto produtoResposta = ConverterUtils.convertTo(response.readEntity(Produto.class),Produto.class);
+		assertEquals(produto.getNome(), produtoResposta.getNome());
+
+	}
+
+	@Test
+	void naoDeveAtualizarProduto(){
+		Response response;
+		produto.setId(-1);
+
+		service = TestUtils.generateWebTarget(URL_LOCAL, "produtos/-1");
+		response = service.request().put(Entity.entity(produto, MediaType.APPLICATION_JSON_TYPE));
+
+		assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(),response.getStatusInfo().getStatusCode());
+
 	}
 
 }

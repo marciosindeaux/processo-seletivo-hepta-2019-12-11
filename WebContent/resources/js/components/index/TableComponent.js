@@ -18,7 +18,8 @@ Vue.component('general-table',{
 			</thead>
             <tbody id="event-table" >
                 <tab-item 
-                    v-for="item in lista"
+                    v-for="item in this.lista " 
+                    v-bind:key="item.id"
                     v-bind:item="item">
                 </tab-item> 
 			</tbody>
