@@ -8,15 +8,15 @@ import java.util.List;
 
 class FabricanteService {
 
-    private FabricanteDAO fabricanteDAO;
+    FabricanteDAO fabricanteDAO;
 
     FabricanteService() {
-        this.fabricanteDAO = new FabricanteDAO();
+        fabricanteDAO = new FabricanteDAO();
     }
 
-    void salvarFabricante(Fabricante fabricante) throws Exception {
+    void salvarFabricante(Fabricante fabricante){
         if(fabricante!= null && !fabricante.getNome().isEmpty()){
-            List<Fabricante> fabricantes = new ArrayList<Fabricante>(fabricanteDAO.getAll());
+            List<Fabricante> fabricantes = fabricanteDAO.selectAll().orElse(new ArrayList<>());
 
             for(Fabricante item : fabricantes){
                 if(item.getNome().equalsIgnoreCase(fabricante.getNome())){
@@ -25,9 +25,13 @@ class FabricanteService {
                 }
             }
 
-            fabricanteDAO.save(fabricante);
+            fabricanteDAO.insert(fabricante);
         }else{
             throw new RuntimeException();
         }
+    }
+
+    List<Fabricante> listarTodos(){
+        return fabricanteDAO.selectAll().orElse(new ArrayList<>());
     }
 }

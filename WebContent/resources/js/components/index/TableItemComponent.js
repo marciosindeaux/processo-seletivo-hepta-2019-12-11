@@ -10,13 +10,15 @@ Vue.component('tab-item', {
             <td>{{ item.unidade }}</td>
             <td>{{ item.estoque }}</td>
             <td>
-                <edit-btn v-bind:produto="this.item" > </edit-btn>
-                <exclude-btn @exclude-item="excluirItem(this.item.id)" v-bind:key="this.item.id"> </exclude-btn>
+                <edit-btn v-bind:produto="item" > </edit-btn>
+                <exclude-btn @exclude-item="excluirItem(item.id)" v-bind:key="this.item.id"> </exclude-btn>
             </td>  
         </tr>
     `,
     methods:{
         excluirItem(idProduto) {
+            const vm = this;
+            console.log(idProduto)
             axios.delete("/mercado/rs/produtos/"+idProduto)
                 .then(response => {
                 }).catch( function (error) {

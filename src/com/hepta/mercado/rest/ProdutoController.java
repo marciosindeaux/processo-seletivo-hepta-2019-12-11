@@ -2,7 +2,6 @@ package com.hepta.mercado.rest;
 
 import com.hepta.mercado.entity.Produto;
 import com.hepta.mercado.service.ProdutoService;
-import jdk.nashorn.internal.objects.annotations.Getter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

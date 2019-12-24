@@ -1,8 +1,10 @@
 package com.hepta.mercado.service;
 
+import com.hepta.mercado.entity.Fabricante;
 import com.hepta.mercado.entity.Produto;
 import com.hepta.mercado.persistence.ProdutoDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoService {
@@ -16,28 +18,47 @@ public class ProdutoService {
         fabricanteService = new FabricanteService();
     }
 
-    public void salvarProduto(Produto produto) throws Exception {
+    public void salvarProduto(Produto produto){
         fabricanteService.salvarFabricante(produto.getFabricante());
-        produtoDAO.save(produto);
+        produto.setFabricante(fabricanteService.listarTodos()
+                .stream()
+                .filter(a -> a.getNome().equalsIgnoreCase(produto.getFabricante().getNome()))
+                .reduce((a,b) -> {
+                    if(b!= null){
+                        return b;
+                    }else{
+                        return a;
+                    }
+                }).orElse(new Fabricante()));
+        produtoDAO.insert(produto);
     }
 
-    public List<Produto> listarProdutos() throws Exception {
-        return produtoDAO.getAll();
+    public List<Produto> listarProdutos(){
+        return produtoDAO.selectAll().orElse(new ArrayList<>());
     }
 
-    public void excluirProduto(Integer id) throws Exception {
+    public void excluirProduto(Integer id){
         produtoDAO.delete(id);
     }
 
-    public void atualizarProduto(Integer id, Produto produto) throws Exception {
-        produtoDAO.find(id);
+    public void atualizarProduto(Integer id, Produto produto){
+        produtoDAO.selectFromId(id);
         produto.setId(id);
         fabricanteService.salvarFabricante(produto.getFabricante());
+        fabricanteService.listarTodos().stream()
+                .filter(a -> a.getNome().equalsIgnoreCase(produto.getFabricante().getNome()))
+                .reduce((a,b) -> {
+                    if(b != null){
+                        return b;
+                    }else{
+                        return a;
+                    }
+                });
         produtoDAO.update(produto);
     }
 
-    public Produto buscarPorId(Integer id) throws Exception {
-        return (Produto) produtoDAO.find(id);
+    public Produto buscarPorId(Integer id) {
+        return produtoDAO.selectFromId(id).orElse(null);
     }
 
 }
