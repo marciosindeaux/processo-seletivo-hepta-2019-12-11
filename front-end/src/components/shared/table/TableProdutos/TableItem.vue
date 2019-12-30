@@ -28,10 +28,10 @@ export default {
     methods:{
         exluirItem(){
             this.$axios.delete("/"+this.item.id)
-                .then()
+                .then((resp) => this.$emit("tbitem:excluir"))
                 .catch((err) => console.log(err));
 
-            this.$emit("tbitem:excluir", true)
+            
         }
     }
 }

@@ -56,11 +56,13 @@ export default {
             .catch((err) => console.log(err));
         },
         excluir(){
+            this.buscarTodos();
             this.excluido = true;
             this.buscarTodos();
         },
         setExclude(){
             this.excluido = false
+            this.buscarTodos();
         }
     }
 
